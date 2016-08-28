@@ -1,0 +1,28 @@
+{
+  "name": "posthaste-server",
+  "version": "0.0.1",
+  "description": "A websocket chat server built in Node.js",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "websockets",
+    "chat"
+  ],
+  "author": "Janel diBiccari",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.13.2",
+    "babelify": "^7.3.0",
+    "dateformat": "^1.0.12",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.9",
+    "socket.io": "^1.4.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
