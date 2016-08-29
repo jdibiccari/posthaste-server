@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [
     "websockets",
@@ -17,6 +18,7 @@
     "babel-cli": "^6.11.4",
     "babel-preset-es2015": "^6.13.2",
     "babelify": "^7.3.0",
+    "body-parser": "^1.15.2",
     "dateformat": "^1.0.12",
     "express": "^4.14.0",
     "mongoose": "^4.5.9",
