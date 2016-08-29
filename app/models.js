@@ -1,13 +1,21 @@
+const randomColor = require('randomcolor')
 const mongoose = require('mongoose'),
 		Schema = mongoose.Schema
 
+function randomUserColor() {
+	// This does not insure unique colors for each user
+	return randomColor({ luminosity: 'bright' })
+}
+
 const UserSchema = new Schema({
 	username: { type: String, required: true, unique: true },
-	last_connected_at: { type: Date, default: Date.now }
+	last_connected_at: { type: Date, default: Date.now },
+	color: { type: String, default: randomUserColor }
 })
 
-UserSchema.static('findByUsername', (username) => {
-	return this.find({ username: username})
+UserSchema.pre('remove', function(next) {
+    Message.remove({user: this._id}).exec()
+    next()
 })
 
 const MessageSchema = new Schema({
