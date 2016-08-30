@@ -10,7 +10,11 @@ module.exports = function(client, io, connections) {
 				const newUser = new User({ username: username })
 				return newUser.save()
 			} else {
-				user.lastSeen().then(id => { console.log(id) })
+				user.unseenMessages().then(messages => {
+					if(messages.length > 0) {
+						client.emit('unseen messages', messages[0].id)
+					}
+				})
 			}
 			return user
 		}).then(user => {

@@ -13,11 +13,12 @@ const UserSchema = new Schema({
 	color: { type: String, default: randomUserColor }
 })
 
-UserSchema.methods.lastSeen = function() {
-	return Message.findOne({'created_at': {'$gte': new Date(this.last_connected_at) }}).then(message => {
-		console.log(message)
-		return message ? message.id : null
-	})
+UserSchema.methods.unseenMessages = function() {
+	return Message.find({'created_at': {'$gte': new Date(this.last_connected_at) } })
+		.populate('user')
+		.then(messages => {
+			return messages
+		})
 }
 
 const MessageSchema = new Schema({
