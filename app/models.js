@@ -9,14 +9,16 @@ function randomUserColor() {
 
 const UserSchema = new Schema({
 	username: { type: String, required: true, unique: true },
-	last_connected_at: { type: Date, default: Date.now },
+	last_connected_at: { type: Date },
 	color: { type: String, default: randomUserColor }
 })
 
-UserSchema.pre('remove', function(next) {
-    Message.remove({user: this._id}).exec()
-    next()
-})
+UserSchema.methods.lastSeen = function() {
+	return Message.findOne({'created_at': {'$gte': new Date(this.last_connected_at) }}).then(message => {
+		console.log(message)
+		return message ? message.id : null
+	})
+}
 
 const MessageSchema = new Schema({
 	msg: { type: String },

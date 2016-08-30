@@ -1,4 +1,5 @@
 const User = require('../models').User
+const Message = require('../models').Message
 
 module.exports = function(client, io, connections) {
 	client.on('login', (username) => {
@@ -8,6 +9,8 @@ module.exports = function(client, io, connections) {
 			if (!user) {
 				const newUser = new User({ username: username })
 				return newUser.save()
+			} else {
+				user.lastSeen().then(id => { console.log(id) })
 			}
 			return user
 		}).then(user => {

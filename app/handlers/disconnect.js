@@ -9,6 +9,7 @@ module.exports = function(client, io, connections) {
 			connections.splice(index, 1)
 			io.sockets.emit('notify', connections)
 			io.sockets.emit('update count', connections.length)
+			client.emit('logout')
 		}
 
 	})
